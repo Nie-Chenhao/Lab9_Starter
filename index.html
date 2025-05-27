@@ -99,9 +99,90 @@
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
+    let clickCount = 0;
+    const user = {
+      name: 'Richard',
+      age: 19,
+      hobbies: ['gaming', 'listening to music']
+    };
 
+    const tabl = [
+      {uid: 0, name: 'Richard', major: 'Computer Science'},
+      {uid: 1, name: 'Paul', major: 'Computer Science'},
+      {uid: 2, name: 'Zachary', major: 'Math'}
+    ];
+
+    function demo1(){
+      demo2();
+    }
+    
+    function demo2(){
+      console.trace('Trace Demo');
+    }
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener('click', e => {
+      console.log("Console Log Demo");
+    });
+
+    errorBtns[1].addEventListener('click', e => {
+      console.error("Console Error Demo")
+    });
+
+    errorBtns[2].addEventListener('click', e => {
+      clickCount += 1;
+      console.log("Count Button: "+clickCount);
+    });
+
+    errorBtns[3].addEventListener('click', e => {
+      console.warn("Console Warn Button");
+    });
+
+    errorBtns[4].addEventListener('click', e => {
+      let number = 2;
+      console.assert((number === 3), "The number is not 3", number);
+    });
+
+    errorBtns[5].addEventListener('click', e => {
+      clickCount = 0;
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener('click', e => {
+      console.dir(user);
+    });
+
+    errorBtns[7].addEventListener('click', e => {
+      console.dirxml(form);
+    });
+
+    errorBtns[8].addEventListener('click', e => {
+      console.group('My group');
+      console.log('Group starts');
+      console.log('Random Demo');
+    });
+
+    errorBtns[9].addEventListener('click', e => {
+      console.log('Group is going to end');
+      console.groupEnd();
+    });
+
+    errorBtns[10].addEventListener('click', e => {
+      console.table(tabl);
+    })
+
+    errorBtns[11].addEventListener('click', e => {
+      console.time('demo timer');
+      console.log('timer started');
+    });
+
+    errorBtns[12].addEventListener('click', e => {
+      console.timeEnd('demo timer');
+    });
+
+    errorBtns[13].addEventListener('click', e => {
+      demo1();
+    })
   </script>
 </body>
 
