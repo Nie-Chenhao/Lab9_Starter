@@ -107,6 +107,7 @@
         if (!isFinite(result)) throw new DemoError('Result is not a finite number');
         output.textContent = result;
       } catch(err){
+        console.error(err);
         output.textContent = 'err';
       } finally{
         console.log('calc attempted');
