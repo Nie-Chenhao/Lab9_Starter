@@ -88,6 +88,13 @@
   </main>
 
   <script>
+    class DemoError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'DemoError';
+      }
+    }
+    window.onerror = (msg) => console.log('[Global handler] →', msg);
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -95,7 +102,15 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try{
+        const result = Function(`"use strict"; return ${firstNum}${operator}${secondNum}`)();
+        if (!isFinite(result)) throw new DemoError('Result is not a finite number');
+        output.textContent = result;
+      } catch(err){
+        output.textContent = 'err';
+      } finally{
+        console.log('calc attempted');
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -130,8 +145,7 @@
     });
 
     errorBtns[2].addEventListener('click', e => {
-      clickCount += 1;
-      console.log("Count Button: "+clickCount);
+      console.count('Count Button');
     });
 
     errorBtns[3].addEventListener('click', e => {
@@ -182,7 +196,10 @@
 
     errorBtns[13].addEventListener('click', e => {
       demo1();
-    })
+    });
+    errorBtns[14].addEventListener('click', () => {
+      nonexistentFunction();   // Fires window.onerror
+    });
   </script>
 </body>
 
